@@ -36,7 +36,7 @@ Horas cronológicas: 24; Créditos: 5
   * Regresión logística con R
   * Nociones báscas de series de tiempo
 ## Evaluaciones
-Taller 1: 4 de nociembre (30%) <br>
-Taller 2: 25 de noviembre (30%)<br>
-Taller 3: 16 de diciembre (30%)<br>
+Control 1: 29 de abril (30%) <br>
+Control 2: xx de mayo (30%)<br>
+Control 3: yy de mayo (30%)<br>
 Asistencia: (10%)
