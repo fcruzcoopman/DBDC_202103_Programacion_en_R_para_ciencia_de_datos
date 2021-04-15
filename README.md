@@ -34,7 +34,7 @@ Horas cronológicas: 24; Créditos: 5
   * Distribuciones de probabilidad
   * Regresión lineal con R
   * Regresión logística con R
-  * Nociones báscas de series de tiempo
+  * Nociones básicas de series de tiempo
 ## Evaluaciones
 Control 1: 22 de abril (30%) <br>
 Control 2: 13 de mayo (30%)<br>
