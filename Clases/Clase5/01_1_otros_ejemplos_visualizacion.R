@@ -26,7 +26,7 @@ aux_data <- flights %>%
   mutate(
     color = colorize(mean_arr_del),
     z = n_vuelos
-    ) %>% 
+  ) %>% 
   na.omit()
 
 
@@ -36,7 +36,7 @@ ggplot(aux_data) +
   aes(x = lon, y = lat, color = mean_arr_del) + 
   geom_point() + 
   borders("state")
-  
+
 
 
 # visualización con highcharter -------------------------------------------
@@ -58,7 +58,21 @@ hcmap("countries/us/us-all", showInLegend = F) %>%
 
 
 # Distribución de vuelos por destino/origen -------------------------------
-# Buscamos generar un dataset donde cada fila represente 
+# Mediante un gráfico de barras "estackeado", queremos representar para cada aeropuerto
+# de destino, la cantidad de vuelos provenientes de los tres aeropuertos de origen en NY.
+
+# Si usamos ggplot ------------------------------------------------------
+
+# 1. La data debe venir en formato "long" (por simplicidad)
+## ESCRIBA SU CÓDICO ACÁ ##
+
+
+# notar que sólo se deben espicificar las columnas a trasponer. 
+# No así los valores de las filas de la coolumna "dest" q es la de nuestro interés
+
+
+# Si usamos highchart -----------------------------------------------------
+# Primero, Buscamos generar un dataset donde cada fila represente 
 # un aeropuerto de destino, y en cada columna se registre el conteo 
 # de vuelos proveniente de los distintos aeropuertos de origen.
 
@@ -70,14 +84,7 @@ vuelos_ori_des <- flights %>%
     values_from = arr_delay,
     values_fn = list(arr_delay = length),
     values_fill = list(arr_delay = 0)
-    
-  ) 
-
-
-# Cantidad de vuelos por origen-destino -----------------------------------
-
-# Mediante un gráfico de barras "estackeado", queremos representar para cada aeropuerto
-# de destino, la cantidad de vuelos provenientes de los tres aeropuertos de origen en NY.
+  )
 
 highchart() %>% 
   hc_chart(type = "column") %>%
@@ -94,20 +101,6 @@ highchart() %>%
                 stack = "destino") %>%
   hc_title(text="Cantidad de vuelos por origen/destino")
 
-
-# Si usaramos ggplot ------------------------------------------------------
-
-# 1. La data debe venir en formato "long" (por simplicidad)
-
-aux <- vuelos_ori_des %>%
-  pivot_longer(
-    cols = c("EWR","LGA","JFK") , # columnas que se quieren despivotear.
-    names_to = "origen", #nombres de las columnas, se van como categorías a una nueva variable (origen)
-    values_to = "cantidad_vuelos", # los valores a rescatar se van a una nueva variable (cantidad_vuelos)
-    values_drop_na = TRUE
-  ) 
-# notar que sólo se deben espicificar las columnas a trasponer. 
-# No así los valores de las filas de la coolumna "dest" q es la de nuestro interés
 
 
 
@@ -131,11 +124,11 @@ df_ts <- flights %>%
 
 df_ts <- df_ts %>% 
   pivot_longer(
-  cols = c("mean_dep_delay" , "mean_wind_gust") , # columnas que se quieren despivotear.
-  names_to = "serie", #nombres de las columnas, se van como categorías a una nueva variable (origen)
-  values_to = "valor", # los valores a rescatar se van a una nueva variable (cantidad_vuelos)
-  values_drop_na = TRUE
-) 
+    cols = c("mean_dep_delay" , "mean_wind_gust") , # columnas que se quieren despivotear.
+    names_to = "serie", #nombres de las columnas, se van como categorías a una nueva variable (origen)
+    values_to = "valor", # los valores a rescatar se van a una nueva variable (cantidad_vuelos)
+    values_drop_na = TRUE
+  ) 
 
 
 
@@ -145,8 +138,4 @@ df_ts %>%
          hcaes(y = valor,
                group = serie, x = time_hour2)
   )
-
-
-
-
 
