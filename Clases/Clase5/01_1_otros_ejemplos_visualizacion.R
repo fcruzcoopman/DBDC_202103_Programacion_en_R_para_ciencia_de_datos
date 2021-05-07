@@ -65,6 +65,15 @@ hcmap("countries/us/us-all", showInLegend = F) %>%
 
 # 1. La data debe venir en formato "long" (por simplicidad)
 ## ESCRIBA SU CÓDICO ACÁ ##
+flights %>%
+  count(dest,origin) %>%
+  ggplot() +
+  aes(x = reorder(dest, -n), y = n, fill = origin ) +
+  geom_bar(stat = "identity",
+           position = "stack") +
+  theme(
+    axis.text.x = element_text(angle = 90 ,size = 6)
+  )
 
 
 # notar que sólo se deben espicificar las columnas a trasponer. 
